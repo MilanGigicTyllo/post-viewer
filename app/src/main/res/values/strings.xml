@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PostViewer</string>
+    <string name="post_title">Post Title</string>
+    <string name="post_body_template">A post created by this user to show that it can in fact be done, however only 2 rows of this post should be showing in this menu at all times</string>
+</resources>
