@@ -10,7 +10,7 @@
         android:id="@+id/tvPostTitle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="@string/post_title"
+        android:text=""
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:background="@color/skyblue"
-        android:text="@string/post_body_template"
+        android:text=""
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/tvUserId"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
 
     <TextView
         android:id="@+id/tvUserId"
-        android:text="userId"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
