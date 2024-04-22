@@ -8,20 +8,14 @@ import com.example.postviewer.Post
 import com.example.postviewer.data.PostRepository
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(private val postId: Int) : ViewModel() {
-
-    private val postRepository = PostRepository()
+class DetailsViewModel() : ViewModel() {
 
     private val _post = MutableLiveData<Post>()
     val post = _post as LiveData<Post>
 
-    init {
-        getPostById(postId)
-    }
-
-    private fun getPostById(postId: Int) {
+    fun getPostById(postId: Int) {
         viewModelScope.launch {
-            _post.value = postRepository.getById(postId)
+            _post.value = PostRepository.getById(postId)
         }
     }
 }

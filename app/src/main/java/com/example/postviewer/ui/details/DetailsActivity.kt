@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class DetailsActivity : AppCompatActivity() {
 
-    private var viewModel: DetailsViewModel? = null
+    private val viewModel: DetailsViewModel by viewModels()
 
     private lateinit var binding: ActivityDetailsBinding
 
@@ -25,12 +25,12 @@ class DetailsActivity : AppCompatActivity() {
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = DetailsViewModel(intent.getIntExtra("postId", -1))
+        viewModel.getPostById(intent.getIntExtra("postId", -1))
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel?.post?.observe(this){ post ->
+        viewModel.post.observe(this){ post ->
             setupPost(post)
         }
     }

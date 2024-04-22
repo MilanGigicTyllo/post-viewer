@@ -5,7 +5,12 @@ import com.example.postviewer.Post
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class PostRepository {
+object PostRepository {
+
+    private const val TAG = "POST_RESPONSE"
+    private const val POST_LIST_URL = "https://jsonplaceholder.typicode.com/"
+
+    private val localCache = PostLocalCache()
 
     private val remoteDataSource: PostRemoteDataSource = Retrofit.Builder()
         .baseUrl(POST_LIST_URL)
@@ -29,10 +34,13 @@ class PostRepository {
     }
 
     suspend fun getById(postId: Int): Post {
-        return try {
+        return localCache.getById(postId) ?: try {
             val response = remoteDataSource.getById(postId)
             if (response.isSuccessful) {
-                response.body() ?: Post()
+                response.body()?.let { post ->
+                    localCache.insert(post)
+                    post
+                } ?: Post()
             } else {
                 Log.e(TAG, response.message())
                 Post()
@@ -43,9 +51,5 @@ class PostRepository {
         }
     }
 
-    companion object {
-        private const val TAG = "POST_RESPONSE"
-        private const val POST_LIST_URL = "https://jsonplaceholder.typicode.com/"
-    }
 
 }
